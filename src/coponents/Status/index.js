@@ -6,8 +6,10 @@ const Status = props => {
 
   return (
     <div>
-      <div>
-        <div style = {{color:statusColor}}>{statusName}</div>
+      <div style = {{margin: 20, display: 'flex', flexDirection: 'column', 
+          alignItems: 'center'}}>
+        <div style = {{color:statusColor, fontSize: 13, 
+          fontWeight: 700}}>{statusName}</div>
         <div style = {{color:statusColor}}>{newCount}</div>
         <div style = {{color:statusColor}}>{totalCount}</div>
         <div style = {{color:statusColor}}>{statusGraph}</div>

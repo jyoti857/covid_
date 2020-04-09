@@ -15,7 +15,8 @@ const Table = props => {
       <h5 className = 'table-fineprint fadeInUp' style = {{animationDelay: '1.5s'}}>
         Complied from State Govt. numbers <Link to = '/faq'>Know more</Link> 
       </h5>
-      <table>
+      <div  style ={{display: 'flex', justifyContent: "center"}}>
+      <table style = {{width: props.width}}>
         <thead>
           <tr>
             <th>STATE</th>
@@ -54,6 +55,7 @@ const Table = props => {
         {count} States/UTS Affected
       </h5>
       </table>
+      </div>
 
     </React.Fragment>
   )

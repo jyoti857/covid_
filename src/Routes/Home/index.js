@@ -4,6 +4,12 @@ import Status from '../../coponents/Status';
 import Table from '../../coponents/Table';
 import axios from 'axios';
 
+const fullDate = new Date().toString().split(' ');
+const day = fullDate[0];
+const date = fullDate[2];
+const month = fullDate[1];
+const time = fullDate[4];
+
 const Home  = props => {
 
   // console.log(props);
@@ -51,26 +57,36 @@ const Home  = props => {
   return (
     <div>
       {/* <NavLink to='/' activeStyle = {{fontWeight: 'bold', color: 'blue'}} >Ho22me</NavLink> */}
-      <div style = {{flexDirection: 'row', display: 'flex', justifyContent: 'space-between'}}>
-      <div style = {{marginTop: 80, marginLeft: 320}}>
+      <div style = {{flexDirection: 'row', display: 'flex', justifyContent: 'center'}}>
+      <div style= {{marginTop:30, marginRight:10}}>
         <div style = {{fontWeight: 'bold', color: '#000'}}>INDIA COVID-19 TRACKER</div>
         <div style = {{fontSize: 10, color: 'grey'}}>A CROWDSOURCED INITIATIVE</div>
       </div>
-      <div style = {{marginRight: 330, marginTop: 83, fontSize: 10}}>
-        <div style = {{color: '#78ff33', fontWeight: 800}}>LAST UPDATED</div>
-        <div style = {{color: '#33ff70'}}>26 MINUTES AGO</div>
-        <div style = {{color: '#33ff70'}}>07 APR, 20:45 IST</div>
+      <div style = {{ marginTop:30, marginLeft:20, fontSize: 10, display: 'flex',
+              flexDirection: 'column', justifyContent: 'flex-end'}}>
+        <div style = {{color: '#18ca12', fontWeight: 800}}>LAST UPDATED</div>
+        <div style = {{color: '#18ca12'}}>ABOUT 26 MINUTES AGO</div>
+        <div style = {{color: '#18ca12', fontWeight: 700}}>{`${date} ${month}, ${time}  IST`}</div>
       </div>
       </div>
-      <div style = {{display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-          width: '50%', marginLeft: 250, marginTop: 20
+      <div style = {{display: 'flex', flexDirection: 'row', justifyContent: 'center',
+           marginTop: 20, alignSelf: 'center', 
         }}>
-        <Status statusColor = 'red' statusName='CONFIRMED' newCount = '[+537]' totalCount = '5330'/>
-        <Status statusColor = 'blue' statusName='ACTIVE' newCount = '' totalCount = '4730'/>
-        <Status statusColor = '#33ff70' statusName='RECOVERED' newCount = '[+537]' totalCount = '5330'/>
-        <Status statusColor = 'grey' statusName='DECEASED' newCount = '[+20]' totalCount = '150'/>
+        <Status statusColor = 'red' statusName='CONFIRMED' newCount = {`[+${states[0] && states[0].deltaconfirmed}]`} 
+              totalCount = {states[0] && states[0].confirmed}
+              />
+        <Status statusColor = 'blue' statusName='ACTIVE' newCount = '' 
+          totalCount = {states[0] && states[0].active}/>
+        <Status statusColor = '#33ff70' statusName='RECOVERED' 
+          newCount = {`+[${states[0] && states[0].deltarecovered}]`}
+          totalCount = {states[0] && states[0].recovered}/>
+        <Status statusColor = 'grey' statusName='DECEASED' 
+          newCount = {`+[${states[0] && states[0].deltadeaths}]`} 
+          totalCount = {states[0] && states[0].deaths}/>
       </div>
-      <Table states = {states || ['sds', 'dsds']} />
+      <div>
+        <Table states = {states || ['sds', 'dsds']} width={200} />
+      </div>
     </div>
   )
 }
