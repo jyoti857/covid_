@@ -3,6 +3,7 @@ import {Link, NavLink, Route} from 'react-router-dom';
 import Status from '../../coponents/Status';
 import Table from '../../coponents/Table';
 import axios from 'axios';
+import Chart from '../../coponents/Practice/Chart/StatusChart';
 
 const fullDate = new Date().toString().split(' ');
 const day = fullDate[0];
@@ -21,11 +22,11 @@ const Home  = props => {
   const [activityLog, setActivityLog] = useState([]);
   const [fetched, setFetched] = useState(false);
 
-  useEffect(() => {
-    if(fetched === false){
-      getStates();
-    }
-  }, [fetched]);
+  // useEffect(() => {
+  //   if(fetched === false){
+  //     getStates();
+  //   }
+  // }, [fetched]);
 
   useEffect(() => {
     getStates();
@@ -48,19 +49,20 @@ const Home  = props => {
       setStateDistrictWiseData(stateDistrictWiseResponse.data);
       setActivityLog(updateLogResponse.data);
       setFetched(true);
-      // console.log("response --->", response);
     }catch(err){
       console.log(err);
     }
   }
+  // console.log("response --->", stateDistrictWiseData);
   // console.log("state ", states, timeSeries, lastUpdated, stateDistrictWiseData);
   return (
     <div>
+      {/* <Chart /> */}
       {/* <NavLink to='/' activeStyle = {{fontWeight: 'bold', color: 'blue'}} >Ho22me</NavLink> */}
       <div style = {{flexDirection: 'row', display: 'flex', justifyContent: 'center'}}>
       <div style= {{marginTop:30, marginRight:10}}>
         <div style = {{fontWeight: 'bold', color: '#000'}}>INDIA COVID-19 TRACKER</div>
-        <div style = {{fontSize: 10, color: 'grey'}}>A CROWDSOURCED INITIATIVE</div>
+        <div style = {{fontSize: 10, color: 'grey'}}>A CROWDSOURCED*jy INITIATIVE</div>
       </div>
       <div style = {{ marginTop:30, marginLeft:20, fontSize: 10, display: 'flex',
               flexDirection: 'column', justifyContent: 'flex-end'}}>
@@ -85,7 +87,9 @@ const Home  = props => {
           totalCount = {states[0] && states[0].deaths}/>
       </div>
       <div>
-        <Table states = {states || ['sds', 'dsds']} width={200} />
+        <Table states = {states || ['sds', 'dsds']} 
+        stateDistrictWiseData = {stateDistrictWiseData}  
+        width={200} />
       </div>
     </div>
   )
